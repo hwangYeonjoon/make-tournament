@@ -3,6 +3,7 @@ import Home from '@pages/Home.jsx';
 import ParticipantList from '@pages/ParticipantList.jsx';
 import RegistrationForm from '@pages/RegistrationForm.jsx';
 import Login from '@pages/Login.jsx';
+import NotFound from '@pages/NotFound.jsx';
 
 function AppRoutes() {
   return (
@@ -11,6 +12,7 @@ function AppRoutes() {
       <Route path="/participant-list" element={<ParticipantList />} />
       <Route path="/registration-form" element={<RegistrationForm />} />
       <Route path="/login" element={<Login />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

@@ -1,14 +1,23 @@
 import React, { useState } from 'react';
 import { TextField, Button, Container, Typography, Box } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import { useUserStore } from '@state/useUserStore.js';
 
 const Login = () => {
   const [name, setName] = useState('');
-  const login = useUserStore((state) => state.login); // zustand의 login 함수 사용
+  const login = useUserStore((state) => state.login);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login(name); // zustand의 login 함수를 호출하여 로그인 처리
+
+    const expiryTime = new Date().getTime() + 30 * 60 * 1000; // 30분 후 만료 시간
+
+    login(name); // 유저 정보를 zustand에 저장
+    localStorage.setItem('user', name); // 유저 이름을 로컬 스토리지에 저장
+    localStorage.setItem('expiryTime', expiryTime); // 만료 시간 저장
+
+    navigate('/'); // 로그인 후 홈으로 리다이렉트
   };
 
   return (
@@ -27,7 +36,6 @@ const Login = () => {
           로그인
         </Typography>
 
-        {/* MUI TextField 컴포넌트 사용 */}
         <TextField
           label="이름"
           variant="outlined"
@@ -38,7 +46,6 @@ const Login = () => {
           sx={{ mb: 2 }}
         />
 
-        {/* MUI Button 컴포넌트 사용 */}
         <Button type="submit" variant="contained" color="primary" fullWidth>
           로그인
         </Button>

@@ -11,7 +11,7 @@ const PrivateRoute = ({ component: Component }) => {
   }
 
   // 로그인 상태면 원하는 컴포넌트 렌더링
-  return Component;
+  return <Component />;
 };
 
 export default PrivateRoute;
