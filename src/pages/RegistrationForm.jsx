@@ -10,8 +10,8 @@ import {
   RadioGroup,
   TextField,
   Typography,
-} from '@mui/material'
-import { useState } from 'react'
+} from '@mui/material';
+import { useState } from 'react';
 
 function RegistrationForm() {
   // 상태 관리 (두 명의 참가자 정보를 입력)
@@ -27,10 +27,10 @@ function RegistrationForm() {
       rank: '',
     },
     matchType: '',
-  })
+  });
 
   const handleChange = (event, player) => {
-    const { name, value } = event.target
+    const { name, value } = event.target;
 
     setFormData((prevState) => ({
       ...prevState,
@@ -38,8 +38,8 @@ function RegistrationForm() {
         ...prevState[player],
         [name]: value,
       },
-    }))
-  }
+    }));
+  };
 
   const isFormValid = () => {
     return (
@@ -50,19 +50,19 @@ function RegistrationForm() {
       formData.player2.gender &&
       formData.player2.rank &&
       formData.matchType
-    )
-  }
+    );
+  };
 
   const handleSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     if (isFormValid()) {
       // formData로 데이터를 제출하는 로직을 여기에 추가
-      console.log('Submitted Data:', formData)
-      alert('참가 신청이 완료되었습니다!')
+      console.log('Submitted Data:', formData);
+      alert('참가 신청이 완료되었습니다!');
     } else {
-      alert('모든 필드를 올바르게 작성해주세요.')
+      alert('모든 필드를 올바르게 작성해주세요.');
     }
-  }
+  };
 
   const ranks = [
     { label: 'A', value: 'A' },
@@ -71,7 +71,7 @@ function RegistrationForm() {
     { label: 'D', value: 'D' },
     { label: 'E', value: 'E' },
     { label: 'F', value: 'F' },
-  ]
+  ];
 
   return (
     <Container maxWidth="sm">
@@ -212,7 +212,7 @@ function RegistrationForm() {
         </form>
       </Box>
     </Container>
-  )
+  );
 }
 
-export default RegistrationForm
+export default RegistrationForm;

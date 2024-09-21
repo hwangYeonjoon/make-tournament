@@ -22,10 +22,10 @@ import {
   TableRow,
   TextField,
   Typography,
-} from '@mui/material'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import ExpandLessIcon from '@mui/icons-material/ExpandLess'
-import { useEffect, useState } from 'react'
+} from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import { useEffect, useState } from 'react';
 
 function ParticipantList() {
   const [teams, setTeams] = useState([
@@ -41,16 +41,16 @@ function ParticipantList() {
       player2: { name: '이민수', gender: 'female', rank: 'D' },
       matchType: 'mixed',
     },
-  ])
+  ]);
 
-  const [filteredTeams, setFilteredTeams] = useState(teams)
+  const [filteredTeams, setFilteredTeams] = useState(teams);
   const [filter, setFilter] = useState({
     gender: '',
     rank: '',
     matchType: '',
-  })
-  const [filterVisible, setFilterVisible] = useState(false)
-  const [editTeam, setEditTeam] = useState(null)
+  });
+  const [filterVisible, setFilterVisible] = useState(false);
+  const [editTeam, setEditTeam] = useState(null);
   const [editData, setEditData] = useState({
     player1Name: '',
     player1Gender: '',
@@ -59,42 +59,42 @@ function ParticipantList() {
     player2Gender: '',
     player2Rank: '',
     matchType: '',
-  })
-  const [openDialog, setOpenDialog] = useState(false)
+  });
+  const [openDialog, setOpenDialog] = useState(false);
 
   const handleFilterChange = (event) => {
-    const { name, value } = event.target
+    const { name, value } = event.target;
     setFilter((prevFilter) => ({
       ...prevFilter,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   const toggleFilterVisibility = () => {
-    setFilterVisible((prevVisible) => !prevVisible)
-  }
+    setFilterVisible((prevVisible) => !prevVisible);
+  };
 
   useEffect(() => {
     const filtered = teams.filter((team) => {
       const matchGender =
         filter.gender === '' ||
         team.player1.gender === filter.gender ||
-        team.player2.gender === filter.gender
+        team.player2.gender === filter.gender;
       const matchRank =
         filter.rank === '' ||
         team.player1.rank === filter.rank ||
-        team.player2.rank === filter.rank
+        team.player2.rank === filter.rank;
       const matchType =
-        filter.matchType === '' || team.matchType === filter.matchType
+        filter.matchType === '' || team.matchType === filter.matchType;
 
-      return matchGender && matchRank && matchType
-    })
+      return matchGender && matchRank && matchType;
+    });
 
-    setFilteredTeams(filtered)
-  }, [filter, teams])
+    setFilteredTeams(filtered);
+  }, [filter, teams]);
 
   const handleEditClick = (team) => {
-    setEditTeam(team.id)
+    setEditTeam(team.id);
     setEditData({
       player1Name: team.player1.name,
       player1Gender: team.player1.gender,
@@ -103,14 +103,14 @@ function ParticipantList() {
       player2Gender: team.player2.gender,
       player2Rank: team.player2.rank,
       matchType: team.matchType,
-    })
-    setOpenDialog(true)
-  }
+    });
+    setOpenDialog(true);
+  };
 
   const handleEditChange = (event) => {
-    const { name, value } = event.target
-    setEditData((prev) => ({ ...prev, [name]: value }))
-  }
+    const { name, value } = event.target;
+    setEditData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSaveEdit = () => {
     setTeams((prev) =>
@@ -134,9 +134,9 @@ function ParticipantList() {
             }
           : team
       )
-    )
-    setOpenDialog(false)
-  }
+    );
+    setOpenDialog(false);
+  };
 
   return (
     <Container maxWidth="md">
@@ -387,7 +387,7 @@ function ParticipantList() {
         </DialogActions>
       </Dialog>
     </Container>
-  )
+  );
 }
 
-export default ParticipantList
+export default ParticipantList;

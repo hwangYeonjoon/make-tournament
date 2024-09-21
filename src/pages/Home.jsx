@@ -1,5 +1,11 @@
-import { Button, Card, CardContent, Container, Typography } from '@mui/material'
-import { Link } from 'react-router-dom'
+import {
+  Button,
+  Card,
+  CardContent,
+  Container,
+  Typography,
+} from '@mui/material';
+import { Link } from 'react-router-dom';
 
 function Home() {
   return (
@@ -38,7 +44,7 @@ function Home() {
         참가자 목록 보기
       </Button>
     </Container>
-  )
+  );
 }
 
-export default Home
+export default Home;

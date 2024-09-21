@@ -1,6 +1,6 @@
-import { BrowserRouter as Router, Link } from 'react-router-dom'
-import { AppBar, Button, Toolbar, Typography } from '@mui/material'
-import AppRoutes from './routes/AppRoutes.jsx'
+import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { AppBar, Button, Toolbar, Typography } from '@mui/material';
+import AppRoutes from './routes/AppRoutes.jsx';
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
         <AppRoutes />
       </div>
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;

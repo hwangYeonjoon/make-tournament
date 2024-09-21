@@ -1,8 +1,8 @@
-import globals from 'globals'
-import pluginJs from '@eslint/js'
-import pluginReact from 'eslint-plugin-react'
-import pluginPrettier from 'eslint-plugin-prettier'
-import prettierConfig from 'eslint-config-prettier'
+import globals from 'globals';
+import pluginJs from '@eslint/js';
+import pluginReact from 'eslint-plugin-react';
+import pluginPrettier from 'eslint-plugin-prettier';
+import prettierConfig from 'eslint-config-prettier';
 
 export default [
   { files: ['**/*.{js,mjs,cjs,jsx}'] },
@@ -28,4 +28,4 @@ export default [
       'react/react-in-jsx-scope': 'off', // React 17 이상에서는 필요 없음
     },
   },
-]
+];
