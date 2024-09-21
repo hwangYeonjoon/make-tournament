@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
-import Home from '@/pages/Home.jsx';
-import ParticipantList from '@/pages/ParticipantList.jsx';
-import RegistrationForm from '@/pages/RegistrationForm.jsx';
+import Home from '@pages/Home.jsx';
+import ParticipantList from '@pages/ParticipantList.jsx';
+import RegistrationForm from '@pages/RegistrationForm.jsx';
 
 function AppRoutes() {
   return (

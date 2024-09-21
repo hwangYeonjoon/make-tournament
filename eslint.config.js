@@ -5,8 +5,14 @@ import pluginPrettier from 'eslint-plugin-prettier';
 import prettierConfig from 'eslint-config-prettier';
 
 export default [
-  { files: ['**/*.{js,mjs,cjs,jsx}'] },
-  { languageOptions: { globals: globals.browser } },
+  {
+    files: ['**/*.{js,mjs,cjs,jsx}'], // 린트할 파일 패턴
+  },
+  {
+    languageOptions: {
+      globals: globals.browser,
+    },
+  },
   pluginJs.configs.recommended,
   pluginReact.configs.flat.recommended,
 
@@ -14,18 +20,20 @@ export default [
   {
     settings: {
       react: {
-        version: 'detect', // React 버전을 자동으로 감지합니다.
+        version: 'detect', // React 버전 자동 감지
       },
     },
   },
 
   // Prettier 통합 및 규칙 설정
   {
-    plugins: { prettier: pluginPrettier },
+    plugins: {
+      prettier: pluginPrettier,
+    },
     rules: {
-      ...prettierConfig.rules,
-      'prettier/prettier': 'error',
-      'react/react-in-jsx-scope': 'off', // React 17 이상에서는 필요 없음
+      ...prettierConfig.rules, // Prettier 규칙 적용
+      'prettier/prettier': 'error', // Prettier 오류는 ESLint에서 오류로 처리
+      'react/react-in-jsx-scope': 'off', // React 17 이상에서는 불필요
     },
   },
 ];

@@ -1,12 +1,10 @@
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import { AppBar, Button, Toolbar, Typography } from '@mui/material';
-import AppRoutes from './routes/AppRoutes.jsx';
+import AppRoutes from '@routes/AppRoutes.jsx';
 
 function App() {
   return (
     <Router>
-      {' '}
-      {/* Router로 감싸기 */}
       <div>
         <AppBar position="static">
           <Toolbar>
