@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Container, Typography } from '@mui/material';
 import { useTeamStore } from '@state/useTeamStore.js';
 import { useFilterStore } from '@state/useFilterStore.js';
@@ -12,6 +12,9 @@ function ParticipantList() {
   const { filter, setFilter } = useFilterStore((state) => state);
   const { editTeam, editData, setEditTeam, setEditData, resetEditData } =
     useEditStore((state) => state);
+
+  // 필터 패널 가시성 상태
+  const [filterVisible, setFilterVisible] = useState(false);
 
   // 필터 적용
   useEffect(() => {
@@ -77,13 +80,22 @@ function ParticipantList() {
     resetEditData();
   };
 
+  const handleToggleFilter = () => {
+    setFilterVisible(!filterVisible);
+  };
+
   return (
     <Container maxWidth="md">
       <Typography variant="h4" gutterBottom sx={{ mt: 4 }}>
         참가 팀 리스트
       </Typography>
 
-      <FilterPanel filter={filter} onFilterChange={handleFilterChange} />
+      <FilterPanel
+        filter={filter}
+        onFilterChange={handleFilterChange}
+        filterVisible={filterVisible}
+        onToggleFilter={handleToggleFilter}
+      />
 
       <ParticipantTable
         teams={teams}
