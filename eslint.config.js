@@ -34,6 +34,7 @@ export default [
       ...prettierConfig.rules, // Prettier 규칙 적용
       'prettier/prettier': 'error', // Prettier 오류는 ESLint에서 오류로 처리
       'react/react-in-jsx-scope': 'off', // React 17 이상에서는 불필요
+      'react/prop-types': 'off',
     },
   },
 ];

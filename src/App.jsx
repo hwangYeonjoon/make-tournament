@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import { AppBar, Button, Toolbar, Typography } from '@mui/material';
 import AppRoutes from '@routes/AppRoutes.jsx';
+import PrivateRoute from '@components/PrivateRoute.jsx';
 
 function App() {
   return (
@@ -16,7 +17,9 @@ function App() {
             </Button>
           </Toolbar>
         </AppBar>
-        <AppRoutes />
+
+        {/* 보호된 경로 설정 */}
+        <PrivateRoute component={<AppRoutes />} />
       </div>
     </Router>
   );
