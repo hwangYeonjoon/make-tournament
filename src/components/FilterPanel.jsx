@@ -81,9 +81,14 @@ const FilterPanel = ({
             >
               <FormControlLabel value="" control={<Radio />} label="전체" />
               <FormControlLabel
-                value="double"
+                value="maledouble"
                 control={<Radio />}
-                label="복식"
+                label="남성 복식"
+              />
+              <FormControlLabel
+                value="femaledouble"
+                control={<Radio />}
+                label="여성 복식"
               />
               <FormControlLabel
                 value="mixed"

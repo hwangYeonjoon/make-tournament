@@ -4,13 +4,13 @@ export const useTeamStore = create((set) => ({
     {
       id: 1,
       player1: { name: '홍길동', gender: 'male', rank: 'A' },
-      player2: { name: '김영희', gender: 'female', rank: 'B' },
-      matchType: 'double',
+      player2: { name: '김영희', gender: 'female', rank: 'A' },
+      matchType: 'maledouble',
     },
     {
       id: 2,
       player1: { name: '박철수', gender: 'male', rank: 'C' },
-      player2: { name: '이민수', gender: 'female', rank: 'D' },
+      player2: { name: '이민수', gender: 'female', rank: 'C' },
       matchType: 'mixed',
     },
   ],

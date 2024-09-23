@@ -19,7 +19,16 @@ const MatchTypeForm = () => {
         onChange={(e) => setMatchType(e.target.value)}
         row
       >
-        <FormControlLabel value="double" control={<Radio />} label="복식" />
+        <FormControlLabel
+          value="maledouble"
+          control={<Radio />}
+          label="남성 복식"
+        />
+        <FormControlLabel
+          value="femaledouble"
+          control={<Radio />}
+          label="여성 복식"
+        />
         <FormControlLabel value="mixed" control={<Radio />} label="혼합 복식" />
       </RadioGroup>
     </FormControl>

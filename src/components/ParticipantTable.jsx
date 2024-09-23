@@ -37,7 +37,11 @@ const ParticipantTable = ({ teams, onEditClick, onDeleteClick }) => {
                 {team.player2.rank}
               </TableCell>
               <TableCell>
-                {team.matchType === 'double' ? '복식' : '혼합 복식'}
+                {team.matchType === 'maledouble'
+                  ? '남성 복식'
+                  : team.matchType === 'femaledouble'
+                    ? '여성 복식'
+                    : '혼합 복식'}
               </TableCell>
               <TableCell>
                 <Button variant="outlined" onClick={() => onEditClick(team)}>
