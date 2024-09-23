@@ -39,9 +39,19 @@ function Home() {
         variant="outlined"
         color="secondary"
         component={Link}
+        style={{ marginRight: '10px' }}
         to="/participant-list"
       >
         참가자 목록 보기
+      </Button>
+      <Button
+        variant="outlined"
+        color="secondary"
+        component={Link}
+        to="/league"
+        style={{ backgroundColor: 'green', color: 'white' }}
+      >
+        리그전 확인
       </Button>
     </Container>
   );
