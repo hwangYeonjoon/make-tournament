@@ -27,14 +27,14 @@ const ParticipantTable = ({ teams, onEditClick, onDeleteClick }) => {
           {teams.map((team) => (
             <TableRow key={team.id}>
               <TableCell>
-                {team.player1.name} /{' '}
-                {team.player1.gender === 'male' ? '남성' : '여성'} /{' '}
-                {team.player1.rank}
+                {team.player1?.name || '정보 없음'} /{' '}
+                {team.player1?.gender === 'male' ? '남성' : '여성'} /{' '}
+                {team.player1?.rank || '랭크 없음'}
               </TableCell>
               <TableCell>
-                {team.player2.name} /{' '}
-                {team.player2.gender === 'male' ? '남성' : '여성'} /{' '}
-                {team.player2.rank}
+                {team.player2?.name || '정보 없음'} /{' '}
+                {team.player2?.gender === 'male' ? '남성' : '여성'} /{' '}
+                {team.player2?.rank || '랭크 없음'}
               </TableCell>
               <TableCell>
                 {team.matchType === 'maledouble'

@@ -6,6 +6,14 @@ import { useEditStore } from '@state/useEditStore.js';
 import FilterPanel from '@components/FilterPanel.jsx';
 import ParticipantTable from '@components/ParticipantTable.jsx';
 import EditDialog from '@components/EditDialog.jsx';
+import { db } from '../config/firebase'; // Firebase Firestore 참조
+import {
+  collection,
+  getDocs,
+  doc,
+  deleteDoc,
+  updateDoc,
+} from 'firebase/firestore';
 
 function ParticipantList() {
   const { teams, setTeams } = useTeamStore((state) => state);
@@ -16,28 +24,50 @@ function ParticipantList() {
   // 필터 패널 가시성 상태
   const [filterVisible, setFilterVisible] = useState(false);
 
+  // 필터링된 팀을 별도의 상태로 관리
+  const [filteredTeams, setFilteredTeams] = useState([]);
+
+  // Firestore에서 팀 데이터 가져오기
+  useEffect(() => {
+    const fetchTeams = async () => {
+      try {
+        const snapshot = await getDocs(collection(db, 'registrations'));
+        const teamList = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setTeams(teamList);
+      } catch (error) {
+        console.error('Error fetching teams:', error);
+      }
+    };
+
+    fetchTeams();
+  }, [setTeams]);
+
   // 필터 적용
   useEffect(() => {
-    const filteredTeams = teams.filter((team) => {
-      const matchGender =
-        filter.gender === '' ||
-        team.player1.gender === filter.gender ||
-        team.player2.gender === filter.gender;
-      const matchRank =
-        filter.rank === '' ||
-        team.player1.rank === filter.rank ||
-        team.player2.rank === filter.rank;
-      const matchType =
-        filter.matchType === '' || team.matchType === filter.matchType;
+    const applyFilter = () => {
+      const filtered = teams.filter((team) => {
+        const matchGender =
+          filter.gender === '' ||
+          team.player1.gender === filter.gender ||
+          team.player2.gender === filter.gender;
+        const matchRank =
+          filter.rank === '' ||
+          team.player1.rank === filter.rank ||
+          team.player2.rank === filter.rank;
+        const matchType =
+          filter.matchType === '' || team.matchType === filter.matchType;
 
-      return matchGender && matchRank && matchType;
-    });
+        return matchGender && matchRank && matchType;
+      });
 
-    // 상태 업데이트가 필요할 때만 호출
-    if (filteredTeams.length !== teams.length) {
-      setTeams(filteredTeams);
-    }
-  }, [filter, teams, setTeams]);
+      setFilteredTeams(filtered); // 필터링된 데이터를 별도의 상태로 관리
+    };
+
+    applyFilter();
+  }, [filter, teams]);
 
   const handleFilterChange = (event) => {
     const { name, value } = event.target;
@@ -57,11 +87,16 @@ function ParticipantList() {
     });
   };
 
-  const handleDelete = (teamId) => {
-    useTeamStore.getState().deleteTeam(teamId);
+  const handleDelete = async (teamId) => {
+    try {
+      await deleteDoc(doc(db, 'registrations', teamId));
+      useTeamStore.getState().deleteTeam(teamId);
+    } catch (error) {
+      console.error('Error deleting team:', error);
+    }
   };
 
-  const handleSaveEdit = () => {
+  const handleSaveEdit = async () => {
     const updatedTeam = {
       id: editTeam,
       player1: {
@@ -76,8 +111,14 @@ function ParticipantList() {
       },
       matchType: editData.matchType,
     };
-    useTeamStore.getState().updateTeam(editTeam, updatedTeam);
-    resetEditData();
+
+    try {
+      await updateDoc(doc(db, 'registrations', editTeam), updatedTeam);
+      useTeamStore.getState().updateTeam(editTeam, updatedTeam);
+      resetEditData();
+    } catch (error) {
+      console.error('Error updating team:', error);
+    }
   };
 
   const handleToggleFilter = () => {
@@ -98,7 +139,7 @@ function ParticipantList() {
       />
 
       <ParticipantTable
-        teams={teams}
+        teams={filteredTeams} // 필터링된 팀을 테이블에 전달
         onEditClick={handleEditClick}
         onDeleteClick={handleDelete}
       />
