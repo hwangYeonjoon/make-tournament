@@ -14,6 +14,26 @@ import {
 } from '@mui/material';
 
 const EditDialog = ({ open, onClose, editData, onEditChange, onSave }) => {
+  // 검증 함수
+  const validateForm = () => {
+    if (editData.player1Name === editData.player2Name) {
+      alert('참가자 1과 참가자 2의 이름이 같을 수 없습니다.');
+      return false;
+    }
+    if (editData.player1Rank !== editData.player2Rank) {
+      alert('참가자 1과 참가자 2의 랭크가 같아야 합니다.');
+      return false;
+    }
+    return true;
+  };
+
+  // 수정 저장 버튼 클릭 핸들러
+  const handleSave = () => {
+    if (validateForm()) {
+      onSave(); // 검증 통과 시에만 저장
+    }
+  };
+
   return (
     <Dialog
       open={open}
@@ -129,7 +149,7 @@ const EditDialog = ({ open, onClose, editData, onEditChange, onSave }) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose}>취소</Button>
-        <Button onClick={onSave} variant="contained">
+        <Button onClick={handleSave} variant="contained">
           저장
         </Button>
       </DialogActions>
